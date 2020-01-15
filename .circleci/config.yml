@@ -12,7 +12,7 @@ jobs:
           root: ~/project/workspace_dir/
           # Must be relative path from root
           paths:
-            - echo-output
+            - empty
   acceptance_test_1:
     docker:
       - image: circleci/ruby:2.6.0-node
@@ -22,11 +22,11 @@ jobs:
           at: ~/project/workspace_dir/
       - run: echo "hi this " >> ~/project/workspace_dir/echo-output1
       # cant have the same file persist from multiple jobs
-      - run: rm workspace_dir/empty
+      - 
       - persist_to_workspace:
           root: ~/project/workspace_dir/
           paths:
-            - echo-output
+            - echo-output1
   acceptance_test_2:
     docker:
       - image: circleci/ruby:2.6.0-node
@@ -35,11 +35,10 @@ jobs:
       - attach_workspace:
           at: ~/project/workspace_dir/
       - run: echo "will " >> ~/project/workspace_dir/echo-output2
-      - run: rm workspace_dir/empty
       - persist_to_workspace:
           root: ~/project/workspace_dir/
           paths:
-            - echo-output
+            - echo-output2
   acceptance_test_3:
     docker:
       - image: circleci/ruby:2.6.0-node
@@ -48,11 +47,10 @@ jobs:
       - attach_workspace:
           at: ~/project/workspace_dir/
       - run: echo "be " >> ~/project/workspace_dir/echo-output3
-      - run: rm workspace_dir/empty
       - persist_to_workspace:
           root: ~/project/workspace_dir/
           paths:
-            - echo-output
+            - echo-output3
   acceptance_test_4:
     docker:
       - image: circleci/ruby:2.6.0-node
@@ -64,7 +62,7 @@ jobs:
       - persist_to_workspace:
           root: ~/project/workspace_dir/
           paths:
-            - echo-output
+            - echo-output3
   deploy:
     docker:
       - image: circleci/ruby:2.6.0-node

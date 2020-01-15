@@ -5,8 +5,7 @@ jobs:
     steps:
       - checkout
       - run: mkdir -p workspace_dir
-      ## cant have the same file persist from multiple jobs
-      # - run: echo "hi " >> ~/project/workspace_dir/echo-output
+      - run: touch workspace_dir/empty
       - persist_to_workspace:
         # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
         # taken to be the root directory of the workspace.
@@ -21,7 +20,9 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/project/workspace_dir/
-      - run: echo "hi! this " >> ~/project/workspace_dir/echo-output1
+      - run: echo "hi this " >> ~/project/workspace_dir/echo-output1
+      # cant have the same file persist from multiple jobs
+      - run: rm workspace_dir/empty
       - persist_to_workspace:
           root: ~/project/workspace_dir/
           paths:
@@ -34,6 +35,7 @@ jobs:
       - attach_workspace:
           at: ~/project/workspace_dir/
       - run: echo "will " >> ~/project/workspace_dir/echo-output2
+      - run: rm workspace_dir/empty
       - persist_to_workspace:
           root: ~/project/workspace_dir/
           paths:
@@ -46,6 +48,7 @@ jobs:
       - attach_workspace:
           at: ~/project/workspace_dir/
       - run: echo "be " >> ~/project/workspace_dir/echo-output3
+      - run: rm workspace_dir/empty
       - persist_to_workspace:
           root: ~/project/workspace_dir/
           paths:

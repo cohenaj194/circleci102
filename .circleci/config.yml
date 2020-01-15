@@ -21,7 +21,10 @@ jobs:
       - attach_workspace:
           at: ~/project/workspace_dir/
       - run: echo "this " >> ~/project/workspace_dir/echo-output
-
+      - persist_to_workspace:
+          root: ~/project/workspace_dir/
+          paths:
+            - echo-output
   acceptance_test_2:
     docker:
       - image: circleci/ruby:2.6.0-node
@@ -30,6 +33,10 @@ jobs:
       - attach_workspace:
           at: ~/project/workspace_dir/
       - run: echo "will " >> ~/project/workspace_dir/echo-output
+      - persist_to_workspace:
+          root: ~/project/workspace_dir/
+          paths:
+            - echo-output
   acceptance_test_3:
     docker:
       - image: circleci/ruby:2.6.0-node
@@ -38,6 +45,10 @@ jobs:
       - attach_workspace:
           at: ~/project/workspace_dir/
       - run: echo "be " >> ~/project/workspace_dir/echo-output
+      - persist_to_workspace:
+          root: ~/project/workspace_dir/
+          paths:
+            - echo-output
   acceptance_test_4:
     docker:
       - image: circleci/ruby:2.6.0-node
@@ -46,7 +57,10 @@ jobs:
       - attach_workspace:
           at: ~/project/workspace_dir/
       - run: echo "a sentence." >> ~/project/workspace_dir/echo-output
-
+      - persist_to_workspace:
+          root: ~/project/workspace_dir/
+          paths:
+            - echo-output
   deploy:
     docker:
       - image: circleci/ruby:2.6.0-node

@@ -22,7 +22,6 @@ jobs:
           at: ~/project/workspace_dir/
       - run: echo "hi this " >> ~/project/workspace_dir/echo-output1
       # cant have the same file persist from multiple jobs
-      - 
       - persist_to_workspace:
           root: ~/project/workspace_dir/
           paths:

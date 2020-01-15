@@ -4,7 +4,7 @@ jobs:
       - image: circleci/ruby:2.6.0-node
     steps:
       - checkout
-      - run: mkdir -p workspace
+      - run: mkdir -p workspace_dir
       - run: echo "hi" >> ~/project/workspace_dir/echo-output
       - persist_to_workspace:
         # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 

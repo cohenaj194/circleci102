@@ -17,34 +17,34 @@ jobs:
     docker:
       - image: circleci/ruby:2.6.0-node
     steps:
+      - checkout
       - attach_workspace:
           at: ~/project/workspace_dir/
-      - checkout
       - run: echo "this " >> ~/project/workspace_dir/echo-output
 
   acceptance_test_2:
     docker:
       - image: circleci/ruby:2.6.0-node
     steps:
+      - checkout
       - attach_workspace:
           at: ~/project/workspace_dir/
-      - checkout
       - run: echo "will " >> ~/project/workspace_dir/echo-output
   acceptance_test_3:
     docker:
       - image: circleci/ruby:2.6.0-node
     steps:
+      - checkout
       - attach_workspace:
           at: ~/project/workspace_dir/
-      - checkout
       - run: echo "be " >> ~/project/workspace_dir/echo-output
   acceptance_test_4:
     docker:
       - image: circleci/ruby:2.6.0-node
     steps:
+      - checkout
       - attach_workspace:
           at: ~/project/workspace_dir/
-      - checkout
       - run: echo "a sentence." >> ~/project/workspace_dir/echo-output
 
   deploy:

@@ -4,37 +4,63 @@ jobs:
       - image: circleci/ruby:2.6.0-node
     steps:
       - checkout
-      - run: echo "hi" >> ./end
+      - run: mkdir -p workspace
+      - run: echo "hi" >> ~/project/workspace_dir/echo-output
+      - persist_to_workspace:
+        # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
+        # taken to be the root directory of the workspace.
+        root: workspace
+        # Must be relative path from root
+        paths:
+          - echo-output
   acceptance_test_1:
     docker:
       - image: circleci/ruby:2.6.0-node
     steps:
+      - attach_workspace:
+          at: ~/project/workspace_dir/
       - checkout
-      - run: echo "this " >> ./end
+      - run: echo "this " >> ~/project/workspace_dir/echo-output
+
   acceptance_test_2:
     docker:
       - image: circleci/ruby:2.6.0-node
     steps:
+      - attach_workspace:
+          at: ~/project/workspace_dir/
       - checkout
-      - run: echo "will " >> ./end
+      - run: echo "will " >> ~/project/workspace_dir/echo-output
   acceptance_test_3:
     docker:
       - image: circleci/ruby:2.6.0-node
     steps:
+      - attach_workspace:
+          at: ~/project/workspace_dir/
       - checkout
-      - run: echo "be " >> ./end
+      - run: echo "be " >> ~/project/workspace_dir/echo-output
   acceptance_test_4:
     docker:
       - image: circleci/ruby:2.6.0-node
     steps:
+      - attach_workspace:
+          at: ~/project/workspace_dir/
       - checkout
-      - run: echo "a sentence." >> ./end
+      - run: echo "a sentence." >> ~/project/workspace_dir/echo-output
+
   deploy:
     docker:
       - image: circleci/ruby:2.6.0-node
     steps:
+      - attach_workspace:
+          at: ~/project/workspace_dir/
+      - run: cat ~/project/workspace_dir/echo-output
       - checkout
-      - run: cat ./end
+      # - run: |
+      #     if [[ `cat ~/project/workspace_dir/echo-output` == "Hello, world!" ]]; then
+      #       echo "It worked!";
+      #     else
+      #       echo "Nope!"; exit 1
+      #     fi
 workflows:
   version: 2
   build_accept_deploy:

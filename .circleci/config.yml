@@ -68,9 +68,9 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/project/workspace_dir/
-      - run: cat ~/project/workspace_dir/echo-output1 >> ~/project/workspace_dir/echo-output1
-      - run: cat ~/project/workspace_dir/echo-output2 >> ~/project/workspace_dir/echo-output1
-      - run: cat ~/project/workspace_dir/echo-output3 >> ~/project/workspace_dir/echo-output1
+      - run: cat ~/project/workspace_dir/echo-output1 >> ~/project/workspace_dir/echo-output
+      - run: cat ~/project/workspace_dir/echo-output2 >> ~/project/workspace_dir/echo-output
+      - run: cat ~/project/workspace_dir/echo-output3 >> ~/project/workspace_dir/echo-output
       - run: cat ~/project/workspace_dir/echo-output
       # - run: |
       #     if [[ `cat ~/project/workspace_dir/echo-output` == "Hello, world!" ]]; then

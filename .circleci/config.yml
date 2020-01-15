@@ -51,10 +51,10 @@ jobs:
     docker:
       - image: circleci/ruby:2.6.0-node
     steps:
+      - checkout
       - attach_workspace:
           at: ~/project/workspace_dir/
       - run: cat ~/project/workspace_dir/echo-output
-      - checkout
       # - run: |
       #     if [[ `cat ~/project/workspace_dir/echo-output` == "Hello, world!" ]]; then
       #       echo "It worked!";

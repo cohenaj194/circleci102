@@ -5,7 +5,7 @@ jobs:
     steps:
       - checkout
       - run: mkdir -p workspace_dir
-      - run: echo "hi" >> ~/project/workspace_dir/echo-output
+      - run: echo "hi " >> ~/project/workspace_dir/echo-output
       - persist_to_workspace:
         # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
         # taken to be the root directory of the workspace.
@@ -20,7 +20,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/project/workspace_dir/
-      - run: echo "this " >> ~/project/workspace_dir/echo-output
+      - run: echo "this " >> ~/project/workspace_dir/echo-output1
       - persist_to_workspace:
           root: ~/project/workspace_dir/
           paths:
@@ -32,7 +32,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/project/workspace_dir/
-      - run: echo "will " >> ~/project/workspace_dir/echo-output
+      - run: echo "will " >> ~/project/workspace_dir/echo-output2
       - persist_to_workspace:
           root: ~/project/workspace_dir/
           paths:
@@ -44,7 +44,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/project/workspace_dir/
-      - run: echo "be " >> ~/project/workspace_dir/echo-output
+      - run: echo "be " >> ~/project/workspace_dir/echo-output3
       - persist_to_workspace:
           root: ~/project/workspace_dir/
           paths:
@@ -56,7 +56,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/project/workspace_dir/
-      - run: echo "a sentence." >> ~/project/workspace_dir/echo-output
+      - run: echo "a sentence." >> ~/project/workspace_dir/echo-output3 
       - persist_to_workspace:
           root: ~/project/workspace_dir/
           paths:
@@ -68,6 +68,9 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/project/workspace_dir/
+      - run: cat ~/project/workspace_dir/echo-output1 >> ~/project/workspace_dir/echo-output1
+      - run: cat ~/project/workspace_dir/echo-output2 >> ~/project/workspace_dir/echo-output1
+      - run: cat ~/project/workspace_dir/echo-output3 >> ~/project/workspace_dir/echo-output1
       - run: cat ~/project/workspace_dir/echo-output
       # - run: |
       #     if [[ `cat ~/project/workspace_dir/echo-output` == "Hello, world!" ]]; then
@@ -91,10 +94,9 @@ workflows:
             - build
       - acceptance_test_4:
           requires:
-            - build
+            - acceptance_test_3
       - deploy:
           requires:
             - acceptance_test_1
             - acceptance_test_2
-            - acceptance_test_3
             - acceptance_test_4

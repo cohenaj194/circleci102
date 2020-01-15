@@ -10,7 +10,7 @@ jobs:
       - image: circleci/ruby:2.6.0-node
     steps:
       - checkout
-      - run: pws
+      - run: echo hi
 workflows:
   version: 2
   build_accept_deploy:

@@ -62,6 +62,12 @@ jobs:
           root: ~/project/workspace_dir/
           paths:
             - echo-output3
+  hold:
+    docker:
+      - image: circleci/ruby:2.6.0-node
+    steps:
+      - checkout
+      - run: echo "ready to deploy"
   deploy:
     docker:
       - image: circleci/ruby:2.6.0-node
@@ -88,7 +94,6 @@ workflows:
           requires:
             - build
       - acceptance_test_2:
-          type: approval 
           requires:
             - build
       - acceptance_test_3:
@@ -97,8 +102,12 @@ workflows:
       - acceptance_test_4:
           requires:
             - acceptance_test_3
-      - deploy:
+      - hold:
           requires:
             - acceptance_test_1
             - acceptance_test_2
             - acceptance_test_4
+      - deploy:
+          type: approval 
+          requires:
+            - hold

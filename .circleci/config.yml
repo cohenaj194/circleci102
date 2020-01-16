@@ -88,6 +88,7 @@ workflows:
           requires:
             - build
       - acceptance_test_2:
+          type: approval 
           requires:
             - build
       - acceptance_test_3:

@@ -103,11 +103,11 @@ workflows:
           requires:
             - acceptance_test_3
       - hold:
+          type: approval 
           requires:
             - acceptance_test_1
             - acceptance_test_2
             - acceptance_test_4
       - deploy:
-          type: approval 
           requires:
             - hold
